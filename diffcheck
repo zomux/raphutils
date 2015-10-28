@@ -1,0 +1,7 @@
+#!/bin/sh
+
+f1=`readlink -m $1`
+f2=`readlink -m $2`
+curl --insecure -F "file1=<$f1" -F "file2=<$f2" -F 'storage-options=month' https://www.diffchecker.com/diff | grep -oE "https://www.diffchecker.com/[0-9a-zA-Z]+?" | head -n 1 > /tmp/diffcheck.result
+cat /tmp/diffcheck.result >> ~/.diffcheck.log
+cat /tmp/diffcheck.result
